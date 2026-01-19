@@ -23,7 +23,7 @@ class profile::nfs::client (
   $instances = lookup('terraform.instances')
   $nfs_server = Hash($instances.map| $key, $values | { [$values['local_ip'], $key] })[$server_ip]
   $nfs_volumes = $instances.dig($nfs_server, 'volumes', 'nfs')
-  $shares_to_mount = keys($nfs_volumes) + $share_names
+  $shares_to_mount = $share_names
   if $nfs_volumes != undef {
     $shares_to_mount = keys($nfs_volumes) + $share_names
   }
